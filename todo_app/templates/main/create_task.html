@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3><a href="{{ url_for('main.todolist') }}">Back to Todolist</a></h3>
+<p><h2>Create Task</h2></p>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(size=64, class="form-control") }}
+        {% for error in form.title.errors %}
+        <p>Error: {{ error }}</p>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <p>{{ form.description.label(class="form-label") }}</p>
+        {{ form.description(cols=24, rows=12, class="form-control") }}
+        {% for error in form.description.errors %}
+        <p>Error: {{ error }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center mb-4">ToDo List</h1>
+
+<a class="btn btn-primary" href="{{ url_for('main.create_task') }}">Create Task</a>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Completed</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.completed }}</td>
+        <td><a href="{{ url_for('main.edit_task', id=task.id) }}">Edit</a></td>
+        <td><a href="{{ url_for('main.delete_task', id=task.id) }}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
