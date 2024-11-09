@@ -9,14 +9,14 @@
         {{ form.title.label(class="form-label") }}
         {{ form.title(size=64, class="form-control") }}
         {% for error in form.title.errors %}
-        <p>Error: {{ error }}</p>
+        <p class="alert alert-danger" >Error: {{ error }}</p>
         {% endfor %}
     </div>
     <div class="mb-3">
         <p>{{ form.description.label(class="form-label") }}</p>
         {{ form.description(cols=24, rows=8, class="form-control") }}
         {% for error in form.description.errors %}
-        <p>Error: {{ error }}</p>
+        <p class="alert alert-danger">Error: {{ error }}</p>
         {% endfor %}
     </div>
     <div class="mb-3">

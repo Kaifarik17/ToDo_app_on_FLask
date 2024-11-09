@@ -5,7 +5,7 @@
 
 <a class="btn btn-primary" href="{{ url_for('main.create_task') }}">Create Task</a>
 
-<table class="table">
+<table class="table table-hover text-center">
     <thead>
       <tr>
         <th scope="col">Task</th>
@@ -17,10 +17,23 @@
     <tbody>
       {% for task in tasks %}
       <tr>
-        <td>{{ task.title }}</td>
-        <td>{{ task.completed }}</td>
-        <td><a href="{{ url_for('main.edit_task', id=task.id) }}">Edit</a></td>
-        <td><a href="{{ url_for('main.delete_task', id=task.id) }}">Delete</a></td>
+        <td>{{ task.title[0:15] }}</td>
+        <td>
+          <form action="{{ url_for('main.edit_task_status', id=task.id) }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input type="checkbox" class="form-check-input" {% if task.completed %} checked{% endif %}
+              name="status_task" onchange="this.form.submit()">
+          </form>
+        </td>
+        <td>
+          <a class="btn btn-secondary" href="{{ url_for('main.edit_task', id=task.id) }}">Edit</a>
+        </td>
+        <td>
+          <form action="{{ url_for('main.delete_task', id=task.id) }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button type="submit" class="btn btn-warning">Delete</button>
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
